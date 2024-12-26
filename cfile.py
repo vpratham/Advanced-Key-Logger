@@ -17,11 +17,10 @@ dirname = ".cnfig"
 def setupFiles(path):
     new_dir = os.path.join(path, dirname)
     
-    if not (os.path.exists(new_dir)):
+    if not os.path.exists(new_dir):
         os.makedirs(new_dir, exist_ok=True)
         print(f'Dir made: {new_dir}')
     
-    #create maliciious file
     file_dir = os.path.join(new_dir, filename)
     files = [f for f in os.listdir(new_dir)]
     
@@ -30,18 +29,13 @@ def setupFiles(path):
             pass
     
     return file_dir
-    
 
-
-    
 def checkfile():
     try: 
         path = os.path.join("C:\\Users", os.getlogin())
         if os.path.exists(path):
-            return (setupFiles(path))
-
-            #   --1
+            return setupFiles(path)
         else:
-            return Exception 
+            raise Exception("Path does not exist")
     except Exception as e:
         return e
