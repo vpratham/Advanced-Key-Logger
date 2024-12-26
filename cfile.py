@@ -1,6 +1,12 @@
-#experimenting code modules
-import os
+#CFLIE.PY
+'''
+CHECKS FOR FILE DIRECTORY
+CREATES DIRECTORY IF NOT EXISTS
+CREATES TXT FILE FOR STORAGE
+RETURNS FILE PATH
+'''
 
+import os
 
 #TODO: move this information to a more secure file
 #error flag
@@ -9,13 +15,6 @@ filename = os.getlogin() + ".txt"
 dirname = ".cnfig"
 
 def setupFiles(path):
-    '''
-    print(path)
-    files = [f for f in os.listdir(path)]
-    for file in files:
-        print(file)
-    '''
-
     new_dir = os.path.join(path, dirname)
     
     if not (os.path.exists(new_dir)):
