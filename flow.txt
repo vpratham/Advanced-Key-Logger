@@ -1,7 +1,0 @@
-#   ignore
-
-cfile.py -> check file system -> keylogger_functional 1.1 & 1.2
-client.py -> c&c -> keylogger_functional 2.0
-run.py -> main program -> executable
-script.py -> keylogger script 
-server.py -> experimental attacker device
