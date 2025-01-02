@@ -1,7 +1,7 @@
 import socket
 from key import HOST,PORT
 
-target = ''
+target = '' #file path of your locally stored file
 
 def start_ftp_server(host, port, target):
     """
